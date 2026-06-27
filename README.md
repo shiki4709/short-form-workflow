@@ -2,14 +2,56 @@
 
 A reusable step-by-step workflow for creating short-form educational/explainer videos (45-90s). Derived from the Sakana Fugu explainer video production process.
 
+## Quick Start
+
+```bash
+# Scan all sources for trending AI topics
+SOCIALDATA_API_KEY=your_key python3 scan.py
+
+# Scan a single source
+python3 scan.py x        # X (Twitter) only
+python3 scan.py github   # GitHub only
+python3 scan.py hn       # Hacker News only
+python3 scan.py reddit   # Reddit only
+```
+
+Pick the ideas you like → they get saved to `ideas.md`.
+
+---
+
+## Phase 0: Idea Sourcing
+
+**Goal:** Find trending topics worth making a video about.
+
+### CLI Tool: `scan.py`
+
+Scans 4 sources for AI-related trending topics:
+
+| Source | What It Scans | Signal |
+|--------|--------------|--------|
+| **X** | Tweets about AI, vibe coding, new tools (last 3 days) | Likes > 30-100 |
+| **GitHub** | Trending repos: AI, LLM, agents, vibe-coding (last 7 days) | Stars > 50 |
+| **HN** | Top stories filtered by AI keywords | Points |
+| **Reddit** | r/artificial, r/MachineLearning, r/LocalLLaMA, r/ChatGPT, r/ClaudeAI | Upvotes |
+
+### Workflow
+1. Run `python3 scan.py` to see what's trending
+2. Pick ideas by number → saved to `ideas.md`
+3. Review `ideas.md` and check off topics you want to script
+4. Move to Phase 1 for the ones you pick
+
+### Requirements
+- `SOCIALDATA_API_KEY` env var (for X/Twitter scanning)
+- Python 3.10+
+
 ---
 
 ## Phase 1: Topic Selection & Research
 
-**Goal:** Pick a topic, take a stance, verify facts.
+**Goal:** Pick a topic from your ideas list, take a stance, verify facts.
 
 ### Steps
-1. **Pick a trending topic** — scan news, X, Reddit for something your audience cares about
+1. **Pick a trending topic** — from `ideas.md` or scan fresh with `python3 scan.py`
 2. **Decide your angle** — are you explaining, reacting, comparing, or building? Pick one.
 3. **Take a stance** — neutral, positive, critical, or "I tried it." Don't sit on the fence.
 4. **Research the facts**
