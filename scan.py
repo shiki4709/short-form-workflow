@@ -91,7 +91,7 @@ def scan_github() -> list[dict]:
             seen.add(name)
             results.append({
                 "source": "GitHub",
-                "title": f"{name} — {r.get('description', 'No description')[:120]}",
+                "title": f"{name} — {(r.get('description') or 'No description')[:120]}",
                 "url": r.get("html_url", ""),
                 "score": r.get("stargazers_count", 0),
                 "meta": f"★ {r.get('stargazers_count', 0)} | {r.get('language', '?')}",
